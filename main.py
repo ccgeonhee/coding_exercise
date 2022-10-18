@@ -9,19 +9,24 @@ import math
 import re
 
 
-def solution(strs: list)->list:
-    count_dict = collections.defaultdict(list)
-    for string in strs:
-        sorted_string = "".join(sorted(string))
-        count_dict[sorted_string].append(string)
-    result = sorted([value for key, value in count_dict.items()], key=lambda x:len(x))
-    print(result)
+def solution(s: str)->str:
+    result = []
+    for i in range(0, len(s)-1):
+        for j in range(i+1, len(s)+1):
+            text = s[i:j]
+            if len(text) < 2:
+                continue
+            if text == text[::-1]:
+                result.append(text)
+
+    result = sorted(result, key=lambda x:len(x))[0]
     return result
+
 
 # 스크립트를 실행하려면 여백의 녹색 버튼을 누릅니다.
 if __name__ == '__main__':
-    strs = ["eat","tea","tan","ate","nat","bat"]
-    solution(strs)
+    s = "cbbd"
+    solution(s)
 
 # https://www.jetbrains.com/help/pycharm/에서 PyCharm 도움말 참조
 
